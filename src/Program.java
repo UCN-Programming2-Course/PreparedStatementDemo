@@ -9,8 +9,11 @@ public class Program {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//ExecuteClassic("123456789");
-		ExecutePrepated("123456789");
+		
+		String input = "123456789";
+		
+		ExecuteClassic(input);
+		//ExecutePrepared(input);
 	}
 
 	public static void ExecuteClassic(String ssn) {
@@ -39,7 +42,7 @@ public class Program {
 		}
 	}
 	
-	public static void ExecutePrepated(String ssn) {
+	public static void ExecutePrepared(String ssn) {
 		
 		
 		try {
