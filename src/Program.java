@@ -12,11 +12,14 @@ public class Program {
 		
 		String input = "123456789";
 		
-		ExecuteClassic(input);
-		//ExecutePrepared(input);
+		//executeClassic(input);
+		//executePrepared(input);
+		
+		//updateEmployeeLNameClassic("123456789", "O'Neill");
+		updateEmployeeLNamePrepared("123456789", "O'Neill");
 	}
 
-	public static void ExecuteClassic(String ssn) {
+	public static void executeClassic(String ssn) {
 		
 		
 		try {
@@ -42,9 +45,8 @@ public class Program {
 		}
 	}
 	
-	public static void ExecutePrepared(String ssn) {
-		
-		
+	public static void executePrepared(String ssn) {
+
 		try {
 			
 			String query = "SELECT * FROM Employee WHERE ssn = ?";
@@ -67,6 +69,39 @@ public class Program {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
+	
+	public static void updateEmployeeLNameClassic(String ssn, String lname) {
+		try {
+			
+			String query = "UPDATE Employee SET lname = '"+ lname +"' WHERE ssn = '"+ ssn +"'";
+			Statement statement = Database.getConnection().createStatement();
+			
+			int result = statement.executeUpdate(query);
+			System.out.println(result);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void updateEmployeeLNamePrepared(String ssn, String lname) {
+		
+		try {
+			
+			String query = "UPDATE Employee SET lname = ? WHERE ssn = ?";
+			
+			PreparedStatement statement = Database.getConnection().prepareStatement(query);
+			statement.setString(1, lname);
+			statement.setString(2, ssn);
+			
+			int result = statement.executeUpdate();
+			System.out.println(result);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
 }
